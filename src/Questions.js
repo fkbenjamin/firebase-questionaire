@@ -1,13 +1,16 @@
 import React from 'react';
 import Question from './Question.js';
 import db from './DB.js'
+import fire from './fire.js'
 
 
 class Questions extends React.Component {
   constructor(props) {
       super(props);
       this.state = {active: 0,
-         questions:[] }
+         questions:[],
+         user: "",
+        notSubmitted: true}
       db.collection('questions').get().then((q) => {
          q.docs.forEach(doc => {
            var data = doc.data();
@@ -17,8 +20,14 @@ class Questions extends React.Component {
            })
          })
        })
+       const auth = fire.auth();
+       auth.onAuthStateChanged(user => {
+         console.log(user)
+         this.setState({user: user})
+       });
   }
   render() {
+    if(this.state.notSubmitted){
     return(
       <div>
         {this.state.questions.map((question, key) =>
@@ -27,7 +36,11 @@ class Questions extends React.Component {
           </div>
         )}
       </div>
-    )};
+    )} else {
+      return(
+        <h2 className="Heading">Fragebogen abgeschickt.</h2>
+    )}
+    };
 
     nextQuestion = () => {
       this.setState({
@@ -42,8 +55,25 @@ class Questions extends React.Component {
     }
 
     submitQuestionaire = () => {
-      console.log("TODO")
-      console.log("Submitting Questionaire",this.props.pin,this.state.questions)
+      var sender_id = "";
+
+        if (this.state.user !== null) {
+          // User is signed in.
+          sender_id = this.state.user.uid.slice(7,12)
+        } else {
+          // No user is signed in.
+          sender_id = "ANONYM"
+        }
+        console.log("Submitting Questionaire",this.props.pin,this.state.questions);
+        console.log("CurrentUser", sender_id);
+        db.collection('submissions').add({
+          sender_id: sender_id,
+          receiver_id: this.props.pin,
+          questions: this.state.questions
+        }).then(res => {
+          console.log("Submitted", res)
+          this.setState({notSubmitted: false})
+        });
     }
 
     updateScore = (key, score) => {
