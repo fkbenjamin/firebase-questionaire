@@ -1,17 +1,22 @@
 import React from 'react';
 import Question from './Question.js';
+import db from './DB.js'
+
 
 class Questions extends React.Component {
   constructor(props) {
       super(props);
       this.state = {active: 0,
-         questions:[
-                       {text: 'Wie cool?', score: 5},
-                       {text: 'Wie smart?',score: 1},
-                       {text: 'Wie nice?', score: 5},
-                       {text: 'Wie funny?', score: 5},
-                       {text: 'Wie sexy?', score: 5},
-                   ] }
+         questions:[] }
+      db.collection('questions').get().then((q) => {
+         q.docs.forEach(doc => {
+           var data = doc.data();
+           data.score = 5;
+           this.setState({
+             questions: [...this.state.questions, data]
+           })
+         })
+       })
   }
   render() {
     return(
@@ -38,7 +43,7 @@ class Questions extends React.Component {
 
     submitQuestionaire = () => {
       console.log("TODO")
-      console.log("Submitting Questionaire",this.state.questions)
+      console.log("Submitting Questionaire",this.props.pin,this.state.questions)
     }
 
     updateScore = (key, score) => {

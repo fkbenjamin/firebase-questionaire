@@ -31,6 +31,16 @@
   padding: 1rem;
 }
 
+.PinCode {
+  position: fixed; /* or absolute */
+  top: 40%;
+  left: 40%;
+}
+
+.Heading {
+  color: white;
+}
+
 .Jumper {
   display: !important inline;
   padding-top: 2rem;
