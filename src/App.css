@@ -6,11 +6,31 @@
   float: right;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  display: !important inline;
+}
+
+.menuIdentifier {
+  display: !important inline;
+  float: left;
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+  text-align: center center center;
 }
 
 .UserBar {
   min-height: 3rem;
+  margin-bottom: 15rem;
 }
+
+.QuestionBox {
+  background-color: #3f51b5;
+}
+
+.QuestionText {
+  color: white;
+  padding: 1rem;
+}
+
 .Jumper {
   display: !important inline;
   padding-top: 2rem;

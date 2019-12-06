@@ -58,8 +58,8 @@ class Question extends React.Component {
     if (!this.props.hidden) {
       return (
         <div className="Question">
-          <Typography id="discrete-slider-small-steps" gutterBottom>
-              {this.state.question}
+          <Typography className="QuestionBox" id="discrete-slider-small-steps" gutterBottom>
+              <div className="QuestionText">{this.state.question}</div>
           </Typography>
           <Slider
             className="Slider"

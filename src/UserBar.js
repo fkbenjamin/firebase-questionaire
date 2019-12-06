@@ -25,9 +25,10 @@ class UserBar extends React.Component {
       <div>
         <AppBar className="UserBar" position="static">
           <div className="menuButton">
+          {this.state.user !== null ? <div className="menuIdentifier">Your Identifier: {this.state.user.uid.slice(0,6)}</div> : <div></div> }
           {this.state.user !== null
             ? <Logout/>
-            : <div><Login/><Signup/></div>
+            : <div><Signup/><Login/></div>
           }
           </div>
         </AppBar>
