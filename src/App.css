@@ -2,6 +2,33 @@
   text-align: center;
 }
 
+.menuButton {
+  float: right;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.UserBar {
+  min-height: 3rem;
+}
+.Jumper {
+  display: !important inline;
+  padding-top: 2rem;
+}
+
+.Submit {
+  padding-top: 2rem;
+}
+
+.Question {
+  padding-left: 20rem;
+  padding-right: 20rem;
+}
+
+.Slider {
+  margin-top: 5rem;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
